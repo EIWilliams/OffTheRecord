@@ -75,7 +75,6 @@ export default function HomePage() {
             <a href="#" className="hover:text-[#89021A] transition">Chambers</a>
             <a href="#" className="hover:text-[#89021A] transition">Law Firms</a>
             <a href="#" className="hover:text-[#89021A] transition">Alternative Careers</a>
-            <a href="#" className="hover:text-[#89021A] transition">Commercial Awareness</a>
             <a href="#" className="hover:text-[#89021A] transition">Work Experience</a>
             <a href="#" className="hover:text-[#89021A] transition">Competitions</a>
             <a href="/deadlines" className="hover:text-[#89021A] transition">Deadlines</a>
