@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { 
-  Scale, 
-  GraduationCap, 
-  Search, 
-  ChevronRight, 
-  MapPin, 
-  Briefcase 
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+
+// Inline Lucide Icon Component for Next.js
+const Icon = ({ name, size = 18, className = "" }) => {
+  useEffect(() => {
+    if ((window as any).lucide) {
+      (window as any).lucide.createIcons();
+    }
+  }, [name]);
+  return <i data-lucide={name} className={`inline-block ${className}`} style={{ width: size, height: size }}></i>;
+};
 
 const FEATURED_ENTITIES = [
   {
@@ -55,6 +56,23 @@ export default function HomePage() {
   const [filterType, setFilterType] = useState('all');
   const [entities, setEntities] = useState(FEATURED_ENTITIES);
 
+  useEffect(() => {
+    // Load Lucide script dynamically for icon rendering
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/lucide@latest';
+    script.async = true;
+    script.onload = () => {
+      if ((window as any).lucide) (window as any).lucide.createIcons();
+    };
+    document.body.appendChild(script);
+  }, []);
+
+  useEffect(() => {
+    if ((window as any).lucide) {
+      (window as any).lucide.createIcons();
+    }
+  }, [entities]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const filtered = FEATURED_ENTITIES.filter(item => {
@@ -67,21 +85,22 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="bg-[#89021A] text-white p-2 rounded-lg flex items-center justify-center">
-              <Scale className="w-5 h-5" />
+              <Icon name="scale" size={20} />
             </div>
-            <span className="font-bold text-xl text-slate-900 tracking-tight">Off the Record</span>
+            <span className="font-bold text-xl text-slate-900 tracking-tight">LegalPath UK</span>
           </div>
           
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-            <Link href="/firms" className="hover:text-[#89021A] transition">Law Firms</Link>
-            <Link href="/chambers" className="hover:text-[#89021A] transition">Chambers</Link>
-            <Link href="/alternative-careers" className="hover:text-[#89021A] transition">Alternative Careers</Link>
+            <a href="#" className="hover:text-[#89021A] transition">Directory</a>
+            <a href="#" className="hover:text-[#89021A] transition">Chambers</a>
+            <a href="#" className="hover:text-[#89021A] transition">Law Firms</a>
+            <a href="#" className="hover:text-[#89021A] transition">Deadlines</a>
           </nav>
 
           <button className="bg-[#89021A] hover:bg-[#A6122D] text-white text-sm font-semibold px-4 py-2 rounded-lg transition">
@@ -94,7 +113,7 @@ export default function HomePage() {
       <section className="bg-slate-900 text-white pt-16 pb-20 px-4 sm:px-6 lg:px-8 text-center relative">
         <div className="max-w-4xl mx-auto">
           <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-[#89021A]/20 text-red-200 border border-[#89021A]/40 mb-6">
-            <GraduationCap className="w-3.5 h-3.5" /> Built Exclusively for UK Law Students
+            <Icon name="graduation-cap" size={14} /> Built Exclusively for UK Law Students
           </span>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
             Find every Law Firm & Chambers in the UK.
@@ -103,10 +122,10 @@ export default function HomePage() {
             Compare NQ salaries, vacation scheme deadlines, practice areas, and entry requirements in one place.
           </p>
 
-          {/* Interactive Search Box */}
+          {/* Live Interactive Search Box */}
           <form onSubmit={handleSearch} className="bg-white p-2 rounded-2xl shadow-2xl flex flex-col sm:flex-row gap-2 max-w-3xl mx-auto text-left">
             <div className="flex items-center flex-1 px-3 bg-slate-50 rounded-xl border border-slate-200">
-              <Search className="w-4 h-4 text-slate-400 mr-2" />
+              <Icon name="search" size={18} className="text-slate-400 mr-2" />
               <input
                 type="text"
                 placeholder="Search name or area (e.g. Corporate, Arbitration)..."
@@ -131,7 +150,7 @@ export default function HomePage() {
                 type="submit"
                 className="bg-[#89021A] hover:bg-[#A6122D] text-white font-semibold px-6 py-3 rounded-xl transition flex items-center justify-center gap-1.5 shrink-0"
               >
-                Filter <ChevronRight className="w-4 h-4" />
+                Filter <Icon name="chevron-right" size={16} />
               </button>
             </div>
           </form>
@@ -187,8 +206,8 @@ export default function HomePage() {
 
                 <h3 className="text-xl font-bold text-slate-900">{entity.name}</h3>
                 <div className="flex items-center gap-4 text-xs text-slate-500 mt-2 mb-4">
-                  <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {entity.hq_city}</span>
-                  <span className="flex items-center gap-1"><Briefcase className="w-3 h-3" /> {entity.category}</span>
+                  <span className="flex items-center gap-1"><Icon name="map-pin" size={12} /> {entity.hq_city}</span>
+                  <span className="flex items-center gap-1"><Icon name="briefcase" size={12} /> {entity.category}</span>
                 </div>
 
                 <div className="space-y-2 mb-6">
