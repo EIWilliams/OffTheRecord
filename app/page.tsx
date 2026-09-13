@@ -155,7 +155,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex justify-between items-end mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-slate-900">Featured Employers</h2>
+            <h2 className="text-2xl font-bold text-slate-900">Legal Employers</h2>
             <p className="text-slate-500 text-sm mt-1">Top commercial law firms and chambers recruiting now.</p>
           </div>
           <span className="text-xs text-slate-400 font-mono">Showing {filteredEntities.length} results</span>
