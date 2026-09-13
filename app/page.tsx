@@ -71,11 +71,13 @@ export default function HomePage() {
           </div>
           
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-            <a href="#" className="hover:text-[#89021A] transition">Directory</a>
+            <a href="#" className="hover:text-[#89021A] transition">Hub</a>
             <a href="#" className="hover:text-[#89021A] transition">Chambers</a>
             <a href="#" className="hover:text-[#89021A] transition">Law Firms</a>
             <a href="#" className="hover:text-[#89021A] transition">Alternative Careers</a>
             <a href="#" className="hover:text-[#89021A] transition">Commercial Awareness</a>
+            <a href="#" className="hover:text-[#89021A] transition">Work Experience</a>
+            <a href="#" className="hover:text-[#89021A] transition">Competitions</a>
             <a href="/deadlines" className="hover:text-[#89021A] transition">Deadlines</a>
           </nav>
 
