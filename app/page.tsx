@@ -2,11 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 
-// Inline Lucide Icon Component for Next.js
 const Icon = ({ name, size = 18, className = "" }) => {
   useEffect(() => {
-    if ((window as any).lucide) {
-      (window as any).lucide.createIcons();
+    if (window.lucide) {
+      window.lucide.createIcons();
     }
   }, [name]);
   return <i data-lucide={name} className={`inline-block ${className}`} style={{ width: size, height: size }}></i>;
@@ -57,23 +56,22 @@ export default function HomePage() {
   const [entities, setEntities] = useState(FEATURED_ENTITIES);
 
   useEffect(() => {
-    // Load Lucide script dynamically for icon rendering
     const script = document.createElement('script');
     script.src = 'https://unpkg.com/lucide@latest';
     script.async = true;
     script.onload = () => {
-      if ((window as any).lucide) (window as any).lucide.createIcons();
+      if (window.lucide) window.lucide.createIcons();
     };
     document.body.appendChild(script);
   }, []);
 
   useEffect(() => {
-    if ((window as any).lucide) {
-      (window as any).lucide.createIcons();
+    if (window.lucide) {
+      window.lucide.createIcons();
     }
   }, [entities]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     const filtered = FEATURED_ENTITIES.filter(item => {
       const matchesTerm = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -86,7 +84,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased">
-      {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -109,7 +106,6 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero Section */}
       <section className="bg-slate-900 text-white pt-16 pb-20 px-4 sm:px-6 lg:px-8 text-center relative">
         <div className="max-w-4xl mx-auto">
           <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-[#89021A]/20 text-red-200 border border-[#89021A]/40 mb-6">
@@ -122,7 +118,6 @@ export default function HomePage() {
             Compare NQ salaries, vacation scheme deadlines, practice areas, and entry requirements in one place.
           </p>
 
-          {/* Live Interactive Search Box */}
           <form onSubmit={handleSearch} className="bg-white p-2 rounded-2xl shadow-2xl flex flex-col sm:flex-row gap-2 max-w-3xl mx-auto text-left">
             <div className="flex items-center flex-1 px-3 bg-slate-50 rounded-xl border border-slate-200">
               <Icon name="search" size={18} className="text-slate-400 mr-2" />
@@ -157,7 +152,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center">
           <div className="p-2 border-r border-slate-100 last:border-0">
@@ -179,7 +173,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Employers Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex justify-between items-end mb-8">
           <div>
