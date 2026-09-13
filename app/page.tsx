@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 
-const Icon = ({ name, size = 18, className = "" }) => {
+const Icon = ({ name, size = 18, className = "" }: { name: string; size?: number; className?: string }) => {
   useEffect(() => {
-    if (window.lucide) {
-      window.lucide.createIcons();
+    if ((window as any).lucide) {
+      (window as any).lucide.createIcons();
     }
   }, [name]);
   return <i data-lucide={name} className={`inline-block ${className}`} style={{ width: size, height: size }}></i>;
@@ -60,18 +60,18 @@ export default function HomePage() {
     script.src = 'https://unpkg.com/lucide@latest';
     script.async = true;
     script.onload = () => {
-      if (window.lucide) window.lucide.createIcons();
+      if ((window as any).lucide) (window as any).lucide.createIcons();
     };
     document.body.appendChild(script);
   }, []);
 
   useEffect(() => {
-    if (window.lucide) {
-      window.lucide.createIcons();
+    if ((window as any).lucide) {
+      (window as any).lucide.createIcons();
     }
   }, [entities]);
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const filtered = FEATURED_ENTITIES.filter(item => {
       const matchesTerm = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
